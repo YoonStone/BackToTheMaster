@@ -103,9 +103,7 @@ public class GM_S : MonoBehaviour {
     // 강아지 생성 -> 승인 or 거부 결정
     void CreateDog()
     {
-        if (GameObject.FindWithTag("Dog"))
-        {}
-        else
+        if (!GameObject.FindWithTag("Dog"))
         {
             // 프리팹중에서 강아지 고르기
             int dog_rand = Random.Range(0, dogList.Length);
@@ -178,16 +176,12 @@ public class GM_S : MonoBehaviour {
         // 서류의 태그 및 통과여부 결정
         paper.IsPass_brain = isPass_brain;
 
-        // 견종 다르게 할거면 여기서 바꾸기
-        if (isPass_kinds)
-        {
-            paper.picture_int = picture;
-        }
-        else
+        // 견종 같다면 사진 동일하게
+        if (isPass_kinds) paper.picture_int = picture;
+        else // 견종이 다르다면 사진 다르게
         {
             paper.picture_int = 18 - picture;
-            if (picture == 9)
-                paper.picture_int = Random.Range(10, 18) - picture;
+            if (picture == 9) paper.picture_int = Random.Range(10, 18) - picture;
         }
 
         // 강아지 게임오브젝트 저장
@@ -200,20 +194,11 @@ public class GM_S : MonoBehaviour {
     // 강아지가 책상에 도착 -> 보따리 만들기
     void CreatePoket()
     {
-        // 보따리 생성하기
+        // 보따리 생성하기 (보따리 색상 랜덤)
         int rand = Random.Range(0, 3);
-        if (rand == 0)
-        {
-            poket_prefab = Instantiate(Resources.Load("Poket/poket1") as GameObject);
-        }
-        else if (rand == 1)
-        {
-            poket_prefab = Instantiate(Resources.Load("Poket/poket2") as GameObject);
-        }
-        else
-        {
-            poket_prefab = Instantiate(Resources.Load("Poket/poket3") as GameObject);
-        }
+        if (rand == 0) poket_prefab = Instantiate(Resources.Load("Poket/poket1") as GameObject);
+        else if (rand == 1) poket_prefab = Instantiate(Resources.Load("Poket/poket2") as GameObject);
+        else poket_prefab = Instantiate(Resources.Load("Poket/poket3") as GameObject);
 
         poket_prefab.transform.position = poket_pos.position;
 
@@ -221,18 +206,16 @@ public class GM_S : MonoBehaviour {
         Poket poket = poket_prefab.GetComponent<Poket>();
 
         // 보따리가 합격이면
-        if (isPass_poket)
-            poket_scale = Random.Range(32, 99);
+        if (isPass_poket) poket_scale = Random.Range(32, 99);
         // 보따리가 불합격이면
-        else
-            poket_scale = Random.Range(2, 29);
+        else poket_scale = Random.Range(2, 29);
 
         poket.MasterScale = poket_scale;
     }
 
     int good, bad;
 
-    // 승인으로 결정
+    // 승인으로 도장을 찍었다면
     void IsPaper_Ok()
     {
         // 합격서류라면
@@ -256,7 +239,7 @@ public class GM_S : MonoBehaviour {
         dogdog.SendMessage("Pass");
     }
 
-    // 거부로 결정
+    // 거부로 도장을 찍었다면
     void IsPaper_No()
     {
         // 합격서류라면

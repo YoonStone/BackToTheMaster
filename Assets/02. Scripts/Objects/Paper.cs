@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// 행동에 오류 *
 public class Paper : MonoBehaviour {
 
     // Dog -> GM -> isPass를 정해줌
@@ -35,7 +34,7 @@ public class Paper : MonoBehaviour {
 
     private void Start()
     {
-        List_S = this.gameObject.GetComponent<ListScript>();
+        List_S = GetComponent<ListScript>();
 
         // 사진
         Picture();
@@ -132,26 +131,11 @@ public class Paper : MonoBehaviour {
     // 견종 -> 사진따라감
     void Kinds()
     {
-        if (picture_int < 4)
-        {
-            kind_Txt.text = "비글";
-        }
-        else if(picture_int < 8)
-        {
-            kind_Txt.text = "불독";
-        }
-        else if(picture_int < 12)
-        {
-            kind_Txt.text = "치와와";
-        }
-        else if(picture_int < 15)
-        {
-            kind_Txt.text = "웰시코기";
-        }
-        else
-        {
-            kind_Txt.text = "퍼그";
-        }
+        if (picture_int < 4) kind_Txt.text = "비글";
+        else if (picture_int < 8) kind_Txt.text = "불독";
+        else if (picture_int < 12) kind_Txt.text = "치와와";
+        else if (picture_int < 15) kind_Txt.text = "웰시코기";
+        else kind_Txt.text = "퍼그";
     }
 
     // 생년월일 -> 랜덤
@@ -175,28 +159,8 @@ public class Paper : MonoBehaviour {
     {
         snack = randSnack;
 
-        if (snack == 1)
-        {
-            snack_Txt.text = "개 껌";
-        }
-        else
-        {
-            snack_Txt.text = "비스켓";
-        }
-    }
-
-    void SitOrStand(int rand_UpDown)
-    {
-        if (rand_UpDown <= 2)
-        {
-            print("앉아있는 강아지");
-            // 간식 주라는 얘기 안보이게
-        }
-        else
-        {
-            print("돌아다니는 강아지");
-            // 간식 주라는 얘기 보이게
-        }
+        if (snack == 1) snack_Txt.text = "개 껌";
+        else snack_Txt.text = "비스켓";
     }
 
     // 머릿속

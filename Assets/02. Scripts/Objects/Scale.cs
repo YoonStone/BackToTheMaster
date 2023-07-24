@@ -91,7 +91,7 @@ public class Scale : MonoBehaviour {
             // 서류 가져오기
             Poket poket = coll.gameObject.GetComponent<Poket>();
 
-            // 서류에 적혀있는 scale값
+            // 서류에 scale값 전달
             scale = poket.MasterScale;
             print(scale);
             // scale값 만큼 바늘 돌려주기
